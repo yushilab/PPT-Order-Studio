@@ -1,0 +1,11 @@
+include AI_QUICKSTART.md
+include AI_USER_GUIDE.md
+include README.md LICENSE AI_START_HERE.md AGENTS.md GEMINI.md bootstrap.ps1 bootstrap.sh requirements-tested.txt .gitignore .gitattributes
+recursive-include docs *.md
+recursive-include skills *.md *.yaml
+recursive-include scripts *.py
+recursive-include .github *.yml
+recursive-include tests *.py
+recursive-include examples *.pptx *.pdf
+recursive-include src/pptstudio/data *.json *.md *.csv
+global-exclude __pycache__ *.py[cod]

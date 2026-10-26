@@ -1,0 +1,17 @@
+.venv/
+__pycache__/
+*.py[cod]
+.pytest_cache/
+.pytest-temp/
+*.egg-info/
+dist/
+build/
+orders/
+.env
+.env.*
+!.env.example
+.DS_Store
+Thumbs.db
+.agents/skills/
+*.log
+.pptstudio-release.json

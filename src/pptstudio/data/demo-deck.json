@@ -1,0 +1,10 @@
+{
+  "schema_version": 1,
+  "slides": [
+    {"id":"S01","layout":"cover","title":"交通文旅融合","message":"从客户资料到可编辑演示文稿","body":["PPT Order Studio · 五页流程示例","虚构项目与数据，仅用于验证工作流"],"source_refs":[]},
+    {"id":"S02","layout":"bullets","title":"以统一流程减少重复制作","message":"内容规划、视觉确认与页面生产分别保存","body":["先整理资料与数据口径，再确定每页需要表达的结论。","用代表性样张确认风格，将字体、配色和组件固定下来。","后续按页面和来源处理修改，保留已确认成果。"],"source_refs":[]},
+    {"id":"S03","layout":"metrics","title":"三项建设成果形成服务基础","message":"每个数字都保留可回查的原始来源","metrics":[{"label":"示范线路","value":"12 条"},{"label":"重点景区","value":"8 个"},{"label":"线上服务","value":"3 类"}],"body":["示例数字取自随项目附带的虚构资料。"],"source_refs":[]},
+    {"id":"S04","layout":"chart","title":"示例服务人次逐年增长","message":"图表由结构化数据生成，可在 PowerPoint 中编辑","chart":{"categories":["2022","2023","2024","2025"],"series":[{"name":"服务人次（万人次）","values":[65,82,106,125]}]},"body":["统计单位：万人次；全部为演示数据。"],"source_refs":[]},
+    {"id":"S05","layout":"closing","title":"从样张确认走向稳定交付","message":"保持内容可追踪、风格可复用、修改有范围","body":["下一步：导入真实客户资料，开始新的订单。","最终交付前，请在客户使用的软件中检查字体与版面。"],"source_refs":[]}
+  ]
+}
