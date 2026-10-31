@@ -8,4 +8,10 @@ recursive-include .github *.yml
 recursive-include tests *.py
 recursive-include examples *.pptx *.pdf
 recursive-include src/pptstudio/data *.json *.md *.csv
+include THIRD_PARTY_NOTICES.md
+recursive-include third_party/pptagent *.py *.md *.json *.yaml *.html *.txt LICENSE
+include third_party/pptagent/.env.example third_party/pptagent/.gitignore
+prune third_party/pptagent/.venv
+prune third_party/pptagent/node_modules
+exclude third_party/pptagent/config.yaml third_party/pptagent/.env third_party/pptagent/runtime-status.json
 global-exclude __pycache__ *.py[cod]

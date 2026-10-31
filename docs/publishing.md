@@ -27,13 +27,15 @@ git push -u origin main
 
 README 已提供实际克隆地址。新用户可以 `git clone` 或从仓库页面下载源码 ZIP，再按安装文档创建环境。正式 Release 和版本标签按需要另行发布。
 
-## v0.1 已提供的工作方式
+## v0.2 已提供的工作方式
 
 本地 CLI 与 JSON 是稳定接口；AI 在会话中读取材料、输出内容，工具执行确定性操作。核心无需云端模型服务；模型 API、桌面应用权限和外部服务均未被项目自动接管。
 
+可选 PPTAgent 源码随仓库和 source 包分发并保留 MIT 版权，普通 wheel 只提供基础流程，PPTAgent 需使用完整仓库。它默认关闭，有独立环境、订单轮次与导入接口；详见 [设计引擎指南](design-engines.md)。发布检查须同时排除 `third_party/pptagent/` 下的虚拟环境、node_modules、runtime-status.json、私人 config.yaml 和 .env；保留可分发的 .env.example。
+
 ## 可逐步增加的能力
 
-以下是后续方向，不是 v0.1 已完成功能：
+以下是后续方向，不是本版已完成功能：
 
 - 更多组件、客户品牌主题和原生表格页型。
 - 可配置的本地 OCR，保留识别置信度与复核位置。

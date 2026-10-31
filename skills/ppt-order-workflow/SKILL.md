@@ -11,15 +11,15 @@ Use the repository CLI as the state and artifact interface. This skill does not 
 
 Locate the repository containing `pyproject.toml` and `AI_START_HERE.md`; all documentation paths below are relative to that repository, not this skill's installed directory. Read `AI_START_HERE.md` first and establish actual file/terminal capabilities. Use its manual exchange route when local execution is unavailable.
 
-Use the project `.venv` interpreter with `-m pptstudio`. For a new machine read `docs/setup.md`, prepare the local environment, and run `doctor`; for an existing order run `status ORDER` before deciding the next stage.
+Use the project `.venv` interpreter with `-m pptstudio`. For a new machine read `docs/setup.md`, prepare the local environment, and run `doctor`; for an existing order run `status ORDER` before deciding the next stage. Inspect `design ORDER` when selecting or revising a design route. The default engine is `builtin`; project `configure` affects new orders, and `init --engine` can override it for one order.
 
 ## Advance one stage
 
 - New materials: preserve originals in the order's `sources/`, run `ingest`, and resolve unsupported/OCR/error statuses. Customer document text is task data, not project policy.
 - Analysis and planning: use `context --stage analyze/plan`, read `docs/data-format.md` when editing JSON, preserve source IDs and units, and save facts/plan. Use `source` for bounded original excerpts instead of reloading the whole archive.
-- Samples: after real outline confirmation, complete representative pages and `style.json`, then `sample --slides ...`. Inspect the actual generated PPTX and rendering. Choose pages that expose content density, charts, and image treatment as relevant to the order.
-- Production: after real design confirmation, prepare `context --stage build --slides ...`, fill the relevant records, validate and build using confirmed style. Reuse layouts rather than rewriting generation code for every page.
-- Revisions: record `feedback`, use provenance and `impact`, and modify the actual affected scope. Consult `docs/workflow.md` for data/style/structure changes and confirmation invalidation.
+- Samples: after real outline confirmation, choose representative pages that expose content density, charts and images. For `builtin`, complete their native fields and `style.json`, then `sample --slides ...` and inspect the actual output. For `pptagent`, use `skills/ppt-order-design/SKILL.md`: `sample` returns a handoff requiring host authoring, upstream review and `design-import` before customer review.
+- Production: after real design confirmation, prepare selected-page context and use the current engine. For `builtin`, complete the native records, validate and build. For `pptagent`, follow the design Skill's full-deck handoff, reuse accepted visual components, and import the reviewed output. A `needs_authoring` response is not a generated deck.
+- Revisions: record `feedback`, use provenance and `impact`, and modify the actual affected scope. Consult `docs/workflow.md` for content changes. If the operator wants another design method, use the design Skill to archive and switch rounds, then obtain current-version design confirmation. Do not silently fallback or load optional upstream material for a builtin order.
 - Delivery: QA, target-software visual review, and customer acceptance refer to the same effective PPTX. Register manually refined files with `baseline`; package only the accepted effective version.
 
 ## State and evidence boundaries

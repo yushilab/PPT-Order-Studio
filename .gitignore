@@ -15,3 +15,9 @@ Thumbs.db
 .agents/skills/
 *.log
 .pptstudio-release.json
+.pptstudio/
+third_party/pptagent/config.yaml
+third_party/pptagent/.env
+third_party/pptagent/.venv/
+third_party/pptagent/node_modules/
+third_party/pptagent/runtime-status.json

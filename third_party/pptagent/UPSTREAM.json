@@ -1,0 +1,32 @@
+{
+  "schema_version": 1,
+  "repository": "https://github.com/icip-cas/PPTAgent",
+  "revision": "833cda553b343be0e486a93b0b57cac962cdd566",
+  "source_directory": "skills/pptagent",
+  "license": "MIT",
+  "files": {
+    ".env.example": "2943b880ac363fb48638fb03143b88e6a2143d30db21f9371f71fde06748df20",
+    ".gitignore": "9bde6cd30b85105d827a002104800a392d52fe5bf0bb8be1cc73c91220b22601",
+    "assets/slide-template.html": "e5115120e635370cca0fcc07d9127f8415b482658c732cdeb8ef6e6c82bbbf9c",
+    "config.example.yaml": "2bb76c03b8836e18f24b302f855040a43f26a7a63755e783a9180908e2c6b94d",
+    "LICENSE": "e1faa9265adfb5feb24c4be691b5c39b559dec4f0414d9ec3a1157cf94faaf8b",
+    "package-lock.json": "d4dfa60730c53b9d6ad9106ad70bc88072c534730c7144afe81e5f845250ca42",
+    "package.json": "ade2434e1a4a0a224e22066d9e3866ac19dddd14ccde1c7863fb26110a81f559",
+    "README.md": "cca4aa68e00c333220f24e3aa5a312daf63511290f0309da8be916d18bd07dbd",
+    "references/task-contract.md": "3617491944196b07e7bd37b081e40f0ada57ceac4919fa21d0c3823aeb5ea3c8",
+    "references/text.md": "7f6ad392d5f36498e876c062f5eb88395632d557cabe6c17def997e798d0154b",
+    "requirements.txt": "5a85fdebda19e08cafc695281fe68367af018c620c7e77396a23459ee2cc4437",
+    "scripts/install.py": "3692bb79b24a3e2eb64c207a5f0cf66fd96b1304af2ae727684b0bb25940f94b",
+    "scripts/pptagent.py": "d2ade4a4d0f2c72ffd740764b4bed44d77c2452353d918043763d0f871024daf",
+    "scripts/pptagent_runtime/__init__.py": "3c540ccfab60eafaf02cb43329da33365b6128bedea18cf400b15bd46281d3f6",
+    "scripts/pptagent_runtime/config.py": "65e087bc47764ba653d953f9153087c63c89c269eeadaa24641e988d54d41faa",
+    "scripts/pptagent_runtime/core.py": "e0ce089cbd591064018adbf0ed55bcd1ac59ac507326d4a4eded5ba9bb88a0ef",
+    "scripts/pptagent_runtime/visual.py": "c0245f7f4a45d3e77e00171b2b4f41e5c5c50606e51372f8c5d916651f7e9961",
+    "scripts/visual_mcp.py": "66a10bb74a0b15c6c95efb40a73223003d175ec4ba4227772f76146b55df92c8",
+    "SKILL.md": "0d790792b14807f471614b985471ae6cd2c96b6dc7c536085f037783687e5c79",
+    "tests/test_browser.py": "55f9640f27e64b2bbbb706246bcfbead4ccafa40f0190b105bc890764cb26b1e",
+    "tests/test_install.py": "2eaf166ba937de8d7381e934332489097b31a3033c2156a52b764b6fb940a50d",
+    "tests/test_visual_mcp.py": "0ebf0f7770648ecef5f150770fafa7cd8ff1c60a11749d43554a1363147aef4c",
+    "tests/test_workflow.py": "4c8283a100e1da94244ba2786beee3f2743cbbb7b96018517775e69a17ca410b"
+  }
+}

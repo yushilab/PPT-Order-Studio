@@ -5,7 +5,14 @@
 | 命令 | 作用 |
 |---|---|
 | `doctor --json` | 检查核心依赖；可选能力缺失不冒充成功 |
+| `configure [--default-engine builtin/pptagent]` | 查看/设置本项目的新订单默认设计方式；默认 builtin |
+| `design-doctor` | 检查可选 PPTAgent 固定源码与环境，不安装 |
 | `init ORDER --title 标题 --pages 20` | 在空目录创建订单 |
+| `init ORDER --title 标题 --pages 20 --engine pptagent` | 本订单覆盖默认设计方式 |
+| `design ORDER` | 查看当前设计和历史轮次 |
+| `design ORDER --engine pptagent --label 第二轮` | 归档当前轮，使用指定方式开始新一轮 |
+| `design ORDER --restore 历史轮次ID` | 校验并恢复该轮页面、样式及仍有效的确认 |
+| `design-import ORDER --workspace 工作区路径` | 校验并导入 PPTAgent 实际完成的样张/全稿 |
 | `ingest ORDER` | 解析 sources/，缓存并报告变化 |
 | `source ORDER SOURCE_ID --start 0 --limit 6000` | 分段回查提取原文 |
 | `context ORDER --stage analyze --max-chars 24000` | 准备分析材料包；其他阶段为 plan/sample/build/revise |
@@ -31,6 +38,8 @@
 | `demo ORDER` | 创建五页虚构草稿示例，不写入客户确认 |
 
 `sample` 和 `build` 可以加 `--draft` 进行试作，草稿不计入设计确认或正式交付。反馈命令只登记工作，不自动替客户修改内容或关闭意见；完成情况可以通过后续反馈记录、版本与人工修改说明追踪。
+
+PPTAgent 模式下 `sample/build` 返回 `needs_authoring` 交接工作区，由宿主 AI 完成上游设计和审阅后再 `design-import`。环境与分步流程见 [设计引擎指南](design-engines.md)。
 
 命令成功通常返回 0，验证不通过或渲染不可用返回 1，输入或流程错误返回 2。终端输出使用 UTF-8 JSON，`source` 输出纯文本。
 

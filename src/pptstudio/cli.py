@@ -19,13 +19,17 @@ def parser():
     sub = p.add_subparsers(dest="command", required=True)
     doctor = sub.add_parser("doctor", help="检查 Python、依赖和可选渲染工具")
     doctor.add_argument("--json", action="store_true", help="输出机器可读 JSON（默认即 JSON）")
+    configure = sub.add_parser("configure", help="查看或设置当前项目新订单的默认设计引擎")
+    configure.add_argument("--default-engine", choices=["builtin", "pptagent"])
+    sub.add_parser("design-doctor", help="检查可选 PPTAgent 源码与运行环境；不安装工具")
     for name, help_text in {
         "init": "创建订单", "ingest": "增量提取 sources/", "source": "按来源 ID 回查原文", "context": "生成有界 AI 材料包",
         "status": "查看确认有效性和当前文件", "validate": "验证内容及设计数据", "sample": "生成 1～5 页样张",
         "build": "按已确认规范生成全稿", "approve": "依据客户明确意见登记确认", "qa": "检查当前 PPTX 的结构",
         "render": "用可选 Office/LibreOffice 导出 PDF", "baseline": "登记人工精修稿", "feedback": "登记反馈及处理范围",
         "impact": "查询来源影响的事实和页面", "usage": "记录可获取的用量或费用", "package": "打包已验收的当前文件",
-        "demo": "生成虚构的五页草稿示例，不伪造审批"}.items():
+        "demo": "生成虚构的五页草稿示例，不伪造审批", "design": "选择、查看或恢复设计方案",
+        "design-import": "导入已完成审阅和转换的 PPTAgent 产物"}.items():
         cmd = sub.add_parser(name, help=help_text)
         cmd.add_argument("order", type=Path)
         if name == "init":
@@ -33,6 +37,14 @@ def parser():
             cmd.add_argument("--pages", required=True, type=int)
             cmd.add_argument("--audience", default="")
             cmd.add_argument("--requirements", default="")
+            cmd.add_argument("--engine", choices=["builtin", "pptagent"])
+        elif name == "design":
+            group = cmd.add_mutually_exclusive_group()
+            group.add_argument("--engine", choices=["builtin", "pptagent"])
+            group.add_argument("--restore", metavar="ATTEMPT_ID")
+            cmd.add_argument("--label", default="")
+        elif name == "design-import":
+            cmd.add_argument("--workspace", required=True, type=Path)
         elif name == "source":
             cmd.add_argument("source_id")
             cmd.add_argument("--start", type=int, default=0)
@@ -81,7 +93,7 @@ def parser():
 def demo(order: Path):
     from importlib.resources import files
     from .ingest import ingest_order
-    core.init_order(order, "交通文旅融合 · 示例成果汇报", 5, "项目评审人员", "虚构演示数据；用于验证流程，不代表真实客户材料。")
+    core.init_order(order, "交通文旅融合 · 示例成果汇报", 5, "项目评审人员", "虚构演示数据；用于验证流程，不代表真实客户材料。", engine="builtin")
     order = order.resolve()
     data = files("pptstudio").joinpath("data")
     for name in ("demo-source.md", "demo-data.csv"):
@@ -110,8 +122,15 @@ def main(argv=None):
         if cmd == "doctor":
             result = core.doctor()
             code = 0 if result["core_ready"] else 1
+        elif cmd == "configure":
+            from .design import configure_default, default_engine
+            result = configure_default(args.default_engine) if args.default_engine else {"default_design_engine": default_engine()}
+        elif cmd == "design-doctor":
+            from .pptagent_bridge import runtime_info
+            result = runtime_info()
+            code = 0 if result.get("ready") else 1
         elif cmd == "init":
-            result = core.init_order(args.order, args.title, args.pages, args.audience, args.requirements)
+            result = core.init_order(args.order, args.title, args.pages, args.audience, args.requirements, engine=args.engine)
         elif cmd == "demo":
             result = demo(args.order)
         else:
@@ -119,6 +138,19 @@ def main(argv=None):
             if cmd == "ingest":
                 from .ingest import ingest_order
                 result = ingest_order(order)
+            elif cmd == "design":
+                from .design import design_history, switch_design, restore_design
+                if args.engine:
+                    result = switch_design(order, args.engine, args.label)
+                elif args.restore:
+                    result = restore_design(order, args.restore)
+                elif args.label:
+                    raise core.WorkflowError("--label 须与 --engine 一起使用。")
+                else:
+                    result = design_history(order)
+            elif cmd == "design-import":
+                result = core.import_design(order, args.workspace)
+                code = 0 if result["qa"]["passed"] else 1
             elif cmd == "source":
                 from .ingest import source_excerpt
                 print(source_excerpt(order, args.source_id, args.start, args.limit))
@@ -133,7 +165,7 @@ def main(argv=None):
                 result = core.status(order)
             elif cmd in {"sample", "build"}:
                 result = core.build(order, ids(args.slides) if cmd == "sample" else None, args.draft)
-                if cmd == "sample":
+                if cmd == "sample" and result.get("status") != "needs_authoring":
                     result = {**result, "qa": core.qa_sample(order)}
             elif cmd == "approve":
                 result = core.approve(order, args.scope, args.by, args.client_confirmed, args.visual_reviewed, args.note)

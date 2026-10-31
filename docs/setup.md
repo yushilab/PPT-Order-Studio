@@ -56,7 +56,11 @@ Linux 若缺少 `venv`，按当前发行版官方说明安装对应 Python venv 
 python scripts/install_skill.py
 ```
 
-从虚拟环境运行该命令，按输出检查目标。其作用是把项目自己的 Skill 安装到本仓库的 `.agents/skills/`，不会修改用户全局配置。支持该标准和发现路径的代理环境可选择它；其他应用直接阅读 `AI_START_HERE.md` 即可。Skill 的源码在 `skills/ppt-order-workflow/`，更新后需重新安装。
+从虚拟环境运行该命令，按输出检查目标。默认安装项目的 workflow 和 design 两个路由 Skill 到本仓库的 `.agents/skills/`，不会修改用户全局配置。可用 `--skill workflow` 或 `--skill design` 只安装一个；更新已安装的项目 Skill 时用 `--force`。其他应用直接阅读 `AI_START_HERE.md` 即可。源码在 `skills/`，PPTAgent 上游只在订单启用后按需读取。
+
+## 可选：PPTAgent 设计环境
+
+默认 `builtin` 只需上述基础环境。选择 PPTAgent 时，需在 Linux/WSL 或 macOS 中准备 Python 3.11+、Node/npm、LibreOffice 和独立运行依赖；执行 `python scripts/setup_pptagent.py --check` 查看缺项，明确需要使用时再按 [设计引擎指南](design-engines.md) 安装。它不会通过普通 bootstrap 自动安装，也不会修改全局 Skill。
 
 ## 渲染与字体
 

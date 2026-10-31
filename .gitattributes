@@ -6,3 +6,4 @@
 *.pptx binary
 *.pdf binary
 *.png binary
+third_party/pptagent/** -text
